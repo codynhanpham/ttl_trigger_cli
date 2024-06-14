@@ -1,7 +1,6 @@
 use clap::Parser;
 use colored::Colorize;
 
-/// Send a TTL pulse (with 1 byte 0xFF) to the selected COM port
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None, arg_required_else_help = true)]
 struct Args {
@@ -53,11 +52,12 @@ fn list_ports() {
     println!();
 }
 
+/// Make sure the selected COM port is available
 fn validate_com_port(com_device: &str) -> bool {
     let ports = serialport::available_ports().expect("\nNo serial ports found! Run the program with `--list` to list all available ports.\n");
 
     if ports.is_empty() {
-        println!("\nNo serial ports found! Run the program with `--list` to list all available ports.\n");
+        println!("\nNo serial ports found! Run the program with {} to list all available ports.\n", "--list".dimmed());
         return false;
     }
 
@@ -67,13 +67,13 @@ fn validate_com_port(com_device: &str) -> bool {
         }
     }
 
-    println!("\nThe COM device '{}' is not available. Run the program with `--list` to list all available ports.\n", com_device.yellow());
+    println!("\nThe COM device '{}' is not available. Run the program with {} to list all available ports.\n", com_device.yellow(), "--list".dimmed());
 
     false
 }
 
 
-
+/// Send a TTL pulse (with 1 byte 0xFF) to the selected COM port
 fn main() {
     let args = Args::parse();
 
@@ -87,7 +87,7 @@ fn main() {
     }
 
 
-    // New serial port
+    // Initialize the serial port
     let mut serial_port = serialport::new(args.com_device.as_str(), args.baudrate)
         .open()
         .expect("Failed to open serial port");
