@@ -2,6 +2,7 @@
 name = "ttl_trigger_cli"
 authors = ["Cody Nhan Pham"]
 organization = "Oviedo Lab"
+repository = "https://github.com/codynhanpham/ttl_trigger_cli"
 description = "A command line tool to send TTL triggers through a serial port."
 license = "MIT"
 version = "0.1.0"

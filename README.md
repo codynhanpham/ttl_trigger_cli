@@ -24,4 +24,4 @@ where `<COM_PORT>` is the COM port of the device and `<BAUDRATE>` is the baudrat
 *The default baudrate is 9600 if not specified.*
 
 ## Important Notes
-Since the app send the TTL via UART, the voltage is held normally high and goes low when the pulse is sent.
+Since the app sends the TTL via UART, the voltage is held normally high and goes low when the pulse is sent.
